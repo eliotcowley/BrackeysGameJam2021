@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8729571168494596668}
   m_Layer: 0
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: GerbilFollower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
