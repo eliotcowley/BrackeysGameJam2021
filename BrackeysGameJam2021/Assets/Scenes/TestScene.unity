@@ -353,9 +353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 10, z: -0}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 2
+  m_YDamping: 2
+  m_ZDamping: 2
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -644,6 +644,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e8350662e21c0c49a75df03b5f6d455, type: 3}
+--- !u!4 &817376060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
+    type: 3}
+  m_PrefabInstance: {fileID: 704621819012325683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1225222343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -812,12 +818,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!4 &1754184145 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 704621819691702498, guid: a007206bed8f4b14b953419e7a781808,
-    type: 3}
-  m_PrefabInstance: {fileID: 704621819012325683}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1793201159
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793201159}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 11, z: 0}
+  m_LocalPosition: {x: -3, y: 10, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1860311319}
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1754184145}
+  m_Follow: {fileID: 817376060}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -1139,7 +1139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062970176}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 11, z: 0}
+  m_LocalPosition: {x: -3, y: 10, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453137590}
@@ -1219,6 +1219,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 704621819691702526, guid: a007206bed8f4b14b953419e7a781808,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 704621820456204068, guid: a007206bed8f4b14b953419e7a781808,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 704621820456204068, guid: a007206bed8f4b14b953419e7a781808,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
       propertyPath: m_RootOrder
@@ -1227,17 +1242,17 @@ PrefabInstance:
     - target: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 704621820456204070, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
@@ -1274,6 +1289,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 704621820456204071, guid: a007206bed8f4b14b953419e7a781808,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 704621820456204071, guid: a007206bed8f4b14b953419e7a781808,
         type: 3}
       propertyPath: m_Name

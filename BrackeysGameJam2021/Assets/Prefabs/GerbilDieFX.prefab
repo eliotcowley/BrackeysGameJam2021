@@ -4588,6 +4588,7 @@ GameObject:
   - component: {fileID: 7297411648882974785}
   - component: {fileID: 7488325526676913393}
   - component: {fileID: 7463153239588932393}
+  - component: {fileID: 7799181691679432772}
   m_Layer: 0
   m_Name: GerbilDieFX
   m_TagString: Untagged
@@ -9156,6 +9157,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7799181691679432772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301036371840884185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20441667b64263d419fab4190920dd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 1
 --- !u!1 &7301037826818468843
 GameObject:
   m_ObjectHideFlags: 0
