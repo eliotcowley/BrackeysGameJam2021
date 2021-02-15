@@ -6,15 +6,34 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class GerbilFollower : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [HideInInspector]
+    public NavMeshAgent Agent;
+
+    [HideInInspector]
+    public bool InSwarm = false;
 
     private void Start()
     {
-        this.agent = GetComponent<NavMeshAgent>();
+        this.Agent = GetComponent<NavMeshAgent>();
     }
 
     private void FixedUpdate()
     {
-        this.agent.SetDestination(PlayerMovement.Instance.Rb.position);
+        if (this.InSwarm)
+        {
+            this.Agent.SetDestination(PlayerMovement.Instance.Rb.position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Constants.Tag_GerbilMain))
+        {
+            if (!this.InSwarm)
+            {
+                this.InSwarm = true;
+                GerbilMain.Instance.SwarmCount++;
+            }
+        }
     }
 }
