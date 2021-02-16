@@ -376,6 +376,7 @@ MonoBehaviour:
     type: 3}
   canvasTransform: {fileID: 1209293135}
   healthBar: {fileID: 1596068674}
+  targetAttackingColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1001 &7461257285796418882
 PrefabInstance:
   m_ObjectHideFlags: 0
