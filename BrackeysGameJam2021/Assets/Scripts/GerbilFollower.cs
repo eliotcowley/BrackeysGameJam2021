@@ -9,6 +9,9 @@ public class GerbilFollower : MonoBehaviour
     [HideInInspector]
     public bool InSwarm = false;
 
+    [HideInInspector]
+    public bool Attacking = false;
+
     [SerializeField]
     private float speed = 0.5f;
 
@@ -25,7 +28,11 @@ public class GerbilFollower : MonoBehaviour
     [SerializeField]
     private GameObject gerbilDieFXPrefab;
 
+    [SerializeField]
+    private float attackInterval = 0.5f;
+
     private Rigidbody rb;
+    private float attackTimer = 0f;
 
     private void Start()
     {
@@ -34,7 +41,7 @@ public class GerbilFollower : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.InSwarm && Vector3.Distance(this.rb.position, PlayerMovement.Instance.Rb.position) > this.maxDistanceFromCenter)
+        if (this.InSwarm && Vector3.Distance(this.rb.position, PlayerMovement.Instance.Rb.position) > this.maxDistanceFromCenter && !this.Attacking)
         {
             Vector3 direction = (PlayerMovement.Instance.Rb.position - this.rb.position) * this.speed * Time.fixedDeltaTime;
             this.rb.velocity = new Vector3(direction.x, this.rb.velocity.y, direction.z);
@@ -42,6 +49,28 @@ public class GerbilFollower : MonoBehaviour
             Quaternion lookRot = Quaternion.LookRotation(direction, Vector3.up);
             Quaternion smoothRot = Quaternion.Lerp(this.rb.rotation, lookRot, this.turnSpeed);
             this.rb.MoveRotation(smoothRot);
+        }
+
+        if (this.Attacking)
+        {
+            Vector3 direction = 
+                (GerbilAttack.Instance.TargetHuman.transform.position - this.rb.position) 
+                * GerbilAttack.Instance.AttackSpeed 
+                * Time.fixedDeltaTime;
+
+            this.rb.velocity = direction;
+
+            Quaternion lookRot = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion smoothRot = Quaternion.Lerp(this.rb.rotation, lookRot, this.turnSpeed);
+            this.rb.MoveRotation(smoothRot);
+
+            this.attackTimer += Time.fixedDeltaTime;
+
+            if (this.attackTimer >= this.attackInterval)
+            {
+                GerbilAttack.Instance.TargetHuman.TakeDamage(GerbilAttack.Instance.DamagePerGerbil);
+                this.attackTimer = 0f;
+            }
         }
 
         if (this.rb.position.y < this.deathY)
@@ -57,7 +86,8 @@ public class GerbilFollower : MonoBehaviour
             if (!this.InSwarm)
             {
                 this.InSwarm = true;
-                GerbilMain.Instance.SwarmCount++;
+                GameManager.Instance.GerbilsInSwarm.Add(this);
+                UIManager.Instance.UpdateSwarmCountText();
             }
         }
     }
@@ -65,7 +95,8 @@ public class GerbilFollower : MonoBehaviour
     public void Die()
     {
         Instantiate(this.gerbilDieFXPrefab, this.rb.position, Quaternion.identity);
-        GerbilMain.Instance.SwarmCount--;
+        GameManager.Instance.GerbilsInSwarm.Remove(this);
+        UIManager.Instance.UpdateSwarmCountText();
         Destroy(this.gameObject);
     }
 }
