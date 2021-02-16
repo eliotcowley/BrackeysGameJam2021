@@ -12,6 +12,13 @@ public class GameManager : Singleton<GameManager>
     private bool gameOver = false;
     private bool paused = false;
 
+    [SerializeField]
+    private float fpsRefreshTime = 0.5f;
+
+    private int frameCount = 0;
+    private float fpsTimer = 0f;
+    private int lastFps = 0;
+
     private void Start()
     {
         this.GerbilsInSwarm = new List<GerbilFollower>();
@@ -19,6 +26,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
+        CalculateFps();
+
         if (this.gameOver)
         {
             if (Input.GetButtonDown(Constants.Input_Attack))
@@ -77,5 +86,22 @@ public class GameManager : Singleton<GameManager>
         {
             Application.Quit();
         }
+    }
+
+    private void CalculateFps()
+    {
+        if (this.fpsTimer < this.fpsRefreshTime)
+        {
+            this.fpsTimer += Time.deltaTime;
+            this.frameCount++;
+        }
+        else
+        {
+            this.lastFps = (int)(this.frameCount / this.fpsTimer);
+            this.frameCount = 0;
+            this.fpsTimer = 0f;
+        }
+
+        UIManager.Instance.SetFpsText(this.lastFps);
     }
 }
