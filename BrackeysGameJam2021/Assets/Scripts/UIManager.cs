@@ -10,6 +10,6 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateSwarmCountText()
     {
-        this.swarmCountText.SetText(GerbilMain.Instance.SwarmCount.ToString());
+        this.swarmCountText.SetText(GameManager.Instance.GerbilsInSwarm.Count.ToString());
     }
 }
