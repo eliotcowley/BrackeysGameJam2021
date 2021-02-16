@@ -7,6 +7,9 @@ public class GerbilAttack : Singleton<GerbilAttack>
     [HideInInspector]
     public Human TargetHuman;
 
+    [HideInInspector]
+    public bool IsAttacking = false;
+
     public float AttackSpeed = 100f;
     public float DamagePerGerbil = 1f;
 
@@ -14,9 +17,17 @@ public class GerbilAttack : Singleton<GerbilAttack>
     {
         if (Input.GetButtonDown(Constants.Input_Attack))
         {
-            if (this.TargetHuman != null)
+            if (this.TargetHuman != null && !this.IsAttacking)
             {
                 Attack();
+            }
+        }
+
+        if (Input.GetButtonDown(Constants.Input_Back))
+        {
+            if (this.IsAttacking)
+            {
+                StopAttacking();
             }
         }
     }
@@ -24,6 +35,8 @@ public class GerbilAttack : Singleton<GerbilAttack>
     private void Attack()
     {
         this.TargetHuman.ButtonIcon.SetActive(false);
+        this.IsAttacking = true;
+        this.TargetHuman.SetTargetAttackColor(true);
 
         // Move gerbils toward human
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
@@ -34,6 +47,14 @@ public class GerbilAttack : Singleton<GerbilAttack>
 
     public void StopAttacking()
     {
+        this.IsAttacking = false;
+        this.TargetHuman.SetTargetAttackColor(false);
+        
+        if (this.TargetHuman.InAttackRange && this.TargetHuman.Health > 0f)
+        {
+            this.TargetHuman.ButtonIcon.SetActive(true);
+        }
+
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
         {
             gerbil.Attacking = false;
