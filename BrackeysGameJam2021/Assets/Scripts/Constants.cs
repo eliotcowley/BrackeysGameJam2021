@@ -8,6 +8,7 @@ public class Constants : MonoBehaviour
     public static string Input_Horizontal = "Horizontal";
     public static string Input_Vertical = "Vertical";
     public static string Input_Attack = "Fire1";
+    public static string Input_Back = "Cancel";
 
     // Tags
     public static string Tag_GerbilMain = "GerbilMain";
