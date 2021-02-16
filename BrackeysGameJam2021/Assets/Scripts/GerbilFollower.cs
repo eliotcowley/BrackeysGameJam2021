@@ -97,6 +97,12 @@ public class GerbilFollower : MonoBehaviour
         Instantiate(this.gerbilDieFXPrefab, this.rb.position, Quaternion.identity);
         GameManager.Instance.GerbilsInSwarm.Remove(this);
         UIManager.Instance.UpdateSwarmCountText();
+
+        if (GameManager.Instance.GerbilsInSwarm.Count <= 0)
+        {
+            GameManager.Instance.GameOver();
+        }
+
         Destroy(this.gameObject);
     }
 }
