@@ -51,9 +51,13 @@ public class GerbilAttack : Singleton<GerbilAttack>
         this.IsAttacking = false;
         this.TargetHuman.SetTargetAttackColor(false);
         
-        if (this.TargetHuman.InAttackRange && this.TargetHuman.Health > 0f)
+        if (this.TargetHuman.InAttackRange)
         {
             this.TargetHuman.ButtonIcon.SetActive(true);
+        }
+        else
+        {
+            this.TargetHuman.Target.SetActive(false);
         }
 
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
