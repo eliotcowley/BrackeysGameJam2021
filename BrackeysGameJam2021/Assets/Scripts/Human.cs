@@ -18,6 +18,9 @@ public class Human : MonoBehaviour
     [HideInInspector]
     public bool RunningAway = false;
 
+    [HideInInspector]
+    public GameObject Target;
+
     [SerializeField]
     private float maxHealth = 100f;
 
@@ -35,17 +38,16 @@ public class Human : MonoBehaviour
 
     [SerializeField]
     private float distanceToRunAway;
-
-    private GameObject target;
+    
     private Material targetMaterial;
     private NavMeshAgent agent;
     private Rigidbody rb;
 
     private void Start()
     {
-        this.target = this.transform.GetChild(0).gameObject;
+        this.Target = this.transform.GetChild(0).gameObject;
         this.Health = this.maxHealth;
-        this.targetMaterial = this.target.GetComponent<Renderer>().material;
+        this.targetMaterial = this.Target.GetComponent<Renderer>().material;
         this.agent = GetComponent<NavMeshAgent>();
         this.rb = GetComponent<Rigidbody>();
     }
@@ -77,7 +79,7 @@ public class Human : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Constants.Tag_GerbilMain) && !GerbilAttack.Instance.IsAttacking)
         {
-            this.target.SetActive(true);
+            this.Target.SetActive(true);
             this.ButtonIcon.SetActive(true);
             GerbilAttack.Instance.TargetHuman = this;
             this.InAttackRange = true;
@@ -86,12 +88,16 @@ public class Human : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(Constants.Tag_GerbilMain) && !GerbilAttack.Instance.IsAttacking)
+        if (other.gameObject.CompareTag(Constants.Tag_GerbilMain))
         {
-            this.target.SetActive(false);
             this.ButtonIcon.SetActive(false);
-            GerbilAttack.Instance.TargetHuman = null;
             this.InAttackRange = false;
+
+            if (!GerbilAttack.Instance.IsAttacking)
+            {
+                this.Target.SetActive(false);
+                GerbilAttack.Instance.TargetHuman = null;
+            }
         }
     }
 
@@ -104,6 +110,7 @@ public class Human : MonoBehaviour
         {
             Instantiate(this.dieFXPrefab, this.transform.position, Quaternion.identity);
             GerbilAttack.Instance.StopAttacking();
+            GerbilAttack.Instance.TargetHuman = null;
             Destroy(this.gameObject);
         }
     }

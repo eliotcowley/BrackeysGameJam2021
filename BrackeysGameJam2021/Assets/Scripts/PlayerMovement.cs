@@ -20,9 +20,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField]
     private float undergroundDepth = 5f;
 
-    [SerializeField]
-    private float delayAfterPause = 0.2f;
-
     private bool isUnderground = false;
     private bool flagForFixedUpdate = false;
 
@@ -36,7 +33,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         if (this.CanMove)
         {
-            if (Input.GetButtonDown(Constants.Input_Attack) && !this.flagForFixedUpdate)
+            if (Input.GetButtonDown(Constants.Input_Attack) && !this.flagForFixedUpdate && GerbilAttack.Instance.TargetHuman == null)
             {
                 this.flagForFixedUpdate = true;
                 this.isUnderground = !this.isUnderground;

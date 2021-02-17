@@ -86,7 +86,7 @@ public class GerbilFollower : MonoBehaviour
     {
         if (other.CompareTag(Constants.Tag_GerbilMain))
         {
-            if (!this.InSwarm)
+            if (!this.InSwarm && !GerbilAttack.Instance.IsAttacking)
             {
                 this.InSwarm = true;
                 GameManager.Instance.GerbilsInSwarm.Add(this);
