@@ -31,6 +31,9 @@ public class GerbilFollower : MonoBehaviour
     [SerializeField]
     private float attackInterval = 0.5f;
 
+    [SerializeField]
+    private float heightAbovePlayerWhenDigging = 1f;
+
     private Rigidbody rb;
     private float attackTimer = 0f;
 
@@ -104,5 +107,12 @@ public class GerbilFollower : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+
+    public void GoUnderground(bool underground)
+    {
+        Vector3 newPos = new Vector3(this.rb.position.x, PlayerMovement.Instance.NewPos.y + this.heightAbovePlayerWhenDigging, this.rb.position.z);
+        this.rb.MovePosition(newPos);
+        this.rb.useGravity = !underground;
     }
 }

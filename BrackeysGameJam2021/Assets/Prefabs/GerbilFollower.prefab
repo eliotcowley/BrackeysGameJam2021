@@ -63,12 +63,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InSwarm: 0
+  Attacking: 0
   speed: 50
   turnSpeed: 0.2
   maxDistanceFromCenter: 2
   deathY: -10
   gerbilDieFXPrefab: {fileID: 7301036371840884185, guid: e803ddbaeadfd1f43a812bc3cd96bf7f,
     type: 3}
+  attackInterval: 0.5
 --- !u!65 &2310327379782639064
 BoxCollider:
   m_ObjectHideFlags: 0

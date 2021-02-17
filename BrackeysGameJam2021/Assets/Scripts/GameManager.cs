@@ -74,6 +74,7 @@ public class GameManager : Singleton<GameManager>
         this.paused = paused;
         UIManager.Instance.TogglePauseText(this.paused);
         Time.timeScale = this.paused ? 0f : 1f;
+        PlayerMovement.Instance.CanMove = !this.paused;
     }
 
     private void Quit()
