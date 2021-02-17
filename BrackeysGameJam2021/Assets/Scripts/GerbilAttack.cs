@@ -34,6 +34,11 @@ public class GerbilAttack : Singleton<GerbilAttack>
 
     private void Attack()
     {
+        if (PlayerMovement.Instance.IsUnderground)
+        {
+            PlayerMovement.Instance.ToggleUnderground();
+        }
+
         this.TargetHuman.ButtonIcon.SetActive(false);
         this.IsAttacking = true;
         this.TargetHuman.SetTargetAttackColor(true);
@@ -58,6 +63,7 @@ public class GerbilAttack : Singleton<GerbilAttack>
         else
         {
             this.TargetHuman.Target.SetActive(false);
+            this.TargetHuman = null;
         }
 
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
