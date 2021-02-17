@@ -54,8 +54,6 @@ public class Human : MonoBehaviour
 
     private void Update()
     {
-        this.canvasTransform.LookAt(this.canvasTransform.position + Camera.main.transform.forward);
-
         if (this.RunningAway)
         {
             // Take average position of gerbils (add up and divide by # gerbils), then run in opposite direction
