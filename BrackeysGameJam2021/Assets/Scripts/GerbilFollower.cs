@@ -46,8 +46,8 @@ public class GerbilFollower : MonoBehaviour
     {
         if (this.InSwarm && Vector3.Distance(this.rb.position, PlayerMovement.Instance.Rb.position) > this.maxDistanceFromCenter && !this.Attacking)
         {
-            Vector3 direction = (PlayerMovement.Instance.Rb.position - this.rb.position) * this.speed;
-            this.rb.velocity = new Vector3(direction.x, this.rb.velocity.y, direction.z) * Time.fixedDeltaTime;
+            Vector3 direction = (PlayerMovement.Instance.Rb.position - this.rb.position) * this.speed * Time.fixedDeltaTime;
+            this.rb.velocity = new Vector3(direction.x, this.rb.velocity.y, direction.z);
 
             Quaternion lookRot = Quaternion.LookRotation(direction, Vector3.up);
             Quaternion smoothRot = Quaternion.Lerp(this.rb.rotation, lookRot, this.turnSpeed);
@@ -116,15 +116,26 @@ public class GerbilFollower : MonoBehaviour
 
     private IEnumerator GoUndergroundCoroutine(bool underground)
     {
-        this.rb.constraints = RigidbodyConstraints.None;
-        Vector3 newPos = new Vector3(this.rb.position.x, PlayerMovement.Instance.Rb.position.y + this.heightAbovePlayerWhenDigging, this.rb.position.z);
-        this.rb.MovePosition(newPos);
-        this.rb.useGravity = !underground;
-        yield return new WaitForFixedUpdate();
-        
-        if (underground)
+        if (LevelBounds.Instance.IsInLevelBounds(this.rb.position))
         {
-            this.rb.constraints = RigidbodyConstraints.FreezePositionY;
+            this.rb.constraints = RigidbodyConstraints.None;
+            Vector3 newPos = new Vector3(this.rb.position.x, PlayerMovement.Instance.Rb.position.y + this.heightAbovePlayerWhenDigging, this.rb.position.z);
+            this.rb.MovePosition(newPos);
+            this.rb.useGravity = !underground;
+            yield return new WaitForFixedUpdate();
+
+            if (underground)
+            {
+                this.rb.constraints = RigidbodyConstraints.FreezePositionY;
+            }
         }
+    }
+
+    public void Fall()
+    {
+        this.rb.constraints = RigidbodyConstraints.None;
+        this.rb.useGravity = true;
+        this.InSwarm = false;
+        GameManager.Instance.GerbilsInSwarm.Remove(this);
     }
 }
