@@ -28,9 +28,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     [SerializeField]
     private float groundAlphaWhenUnderground = 0.5f;
-    
+
+    [SerializeField]
+    private float digDelay = 0.5f;
+
     private bool flagForFixedUpdate = false;
     private Color groundMaterialColor;
+    private float digTimer = 0f;
 
     private void Awake()
     {
@@ -40,9 +44,17 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void Update()
     {
+        if (this.digTimer < this.digDelay)
+        {
+            this.digTimer += Time.deltaTime;
+        }
+
         if (this.CanMove)
         {
-            if (Input.GetButtonDown(Constants.Input_Attack) && !this.flagForFixedUpdate && GerbilAttack.Instance.TargetHuman == null)
+            if (Input.GetButtonDown(Constants.Input_Attack) 
+                && !this.flagForFixedUpdate 
+                && GerbilAttack.Instance.TargetHuman == null
+                && this.digTimer >= this.digDelay)
             {
                 ToggleUnderground();
             }
@@ -95,6 +107,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private IEnumerator ToggleUndergroundCoroutine()
     {
+        this.digTimer = 0f;
         this.flagForFixedUpdate = true;
         this.IsUnderground = !this.IsUnderground;
         float newY = this.IsUnderground ? this.Rb.position.y - this.undergroundDepth : this.Rb.position.y + this.undergroundDepth;

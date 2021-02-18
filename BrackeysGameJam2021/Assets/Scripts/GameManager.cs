@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     private bool gameOver = false;
     private bool paused = false;
+    private bool levelWon = false;
 
     [SerializeField]
     private float fpsRefreshTime = 0.5f;
@@ -42,9 +43,17 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            if (Input.GetButtonDown(Constants.Input_Pause))
+            if (Input.GetButtonDown(Constants.Input_Pause) && !this.levelWon)
             {
                 TogglePause(!this.paused);
+            }
+        }
+
+        if (this.levelWon)
+        {
+            if (Input.GetButtonDown(Constants.Input_Attack))
+            {
+                GoToNextLevel();
             }
         }
     }
@@ -112,5 +121,27 @@ public class GameManager : Singleton<GameManager>
     {
         TogglePause(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Win()
+    {
+        UIManager.Instance.ShowWinText();
+        this.levelWon = true;
+        PlayerMovement.Instance.CanMove = false;
+        PlayerMovement.Instance.NewVelocity = Vector3.zero;
+    }
+
+    private void GoToNextLevel()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Restart();
+        }
     }
 }

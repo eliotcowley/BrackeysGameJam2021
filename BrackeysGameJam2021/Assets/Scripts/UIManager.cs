@@ -22,6 +22,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Selectable pauseFirstSelected;
 
+    [SerializeField]
+    private GameObject winText;
+
     public void UpdateSwarmCountText()
     {
         this.swarmCountText.SetText(GameManager.Instance.GerbilsInSwarm.Count.ToString());
@@ -61,5 +64,10 @@ public class UIManager : Singleton<UIManager>
     public void OnQuitButtonPressed()
     {
         GameManager.Instance.Quit();
+    }
+
+    public void ShowWinText()
+    {
+        this.winText.SetActive(true);
     }
 }
