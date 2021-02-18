@@ -14,4 +14,7 @@ public class Constants : MonoBehaviour
     // Tags
     public static string Tag_GerbilMain = "GerbilMain";
     public static string Tag_GerbilFollower = "GerbilFollower";
+
+    // Animation
+    public static string Anim_DoorOpen = "DoorOpen";
 }
