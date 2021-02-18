@@ -54,6 +54,7 @@ public class GameManager : Singleton<GameManager>
         PlayerMovement.Instance.CanMove = false;
         UIManager.Instance.ShowGameOverText();
         this.gameOver = true;
+        PlayerMovement.Instance.NewVelocity = Vector3.zero;
     }
 
     public void TogglePause(bool paused)
