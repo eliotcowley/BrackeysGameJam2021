@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -143,5 +144,15 @@ public class GameManager : Singleton<GameManager>
         {
             Restart();
         }
+    }
+
+    public Vector3 GetAverageGerbilPosition()
+    {
+        Vector3 total = this.GerbilsInSwarm.Aggregate(
+            Vector3.zero,
+            (workingTotal, next) => workingTotal + next.transform.position,
+            workingTotal => workingTotal);
+
+        return total / this.GerbilsInSwarm.Count;
     }
 }

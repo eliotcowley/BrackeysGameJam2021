@@ -32,6 +32,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField]
     private float digDelay = 0.5f;
 
+    [SerializeField]
+    private float minDistanceToJump = 1f;
+
     private bool flagForFixedUpdate = false;
     private Color groundMaterialColor;
     private float digTimer = 0f;
@@ -59,6 +62,16 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 ToggleUnderground();
             }
 
+            if (Input.GetButtonDown(Constants.Input_Jump))
+            {
+                Vector3 average = GameManager.Instance.GetAverageGerbilPosition();
+
+                if (Vector3.Distance(this.Rb.position, average) > this.minDistanceToJump)
+                {
+                    this.Rb.MovePosition(average);
+                }
+            }
+
             float horizontal = Input.GetAxisRaw(Constants.Input_Horizontal);
             float vertical = Input.GetAxisRaw(Constants.Input_Vertical);
             Vector3 direction = new Vector3(horizontal, 0, vertical);
@@ -69,34 +82,12 @@ public class PlayerMovement : Singleton<PlayerMovement>
             }
 
             this.NewVelocity = direction * this.speed;
-            //this.NewPos.x = newVelocity.x;
-            //this.NewPos.z = newVelocity.z;
-
-            //if (!this.flagForFixedUpdate)
-            //{
-            //    this.NewVelocity.y = this.Rb.position.y;
-            //}
         }
     }
 
     private void FixedUpdate()
     {
-        //Vector3 moveVector = new Vector3(
-        //    this.NewVelocity.x * Time.fixedDeltaTime, 
-        //    this.NewVelocity.y, 
-        //    this.NewVelocity.z * Time.fixedDeltaTime);
-
-        //this.Rb.MovePosition(moveVector);
         this.Rb.velocity = this.NewVelocity * Time.fixedDeltaTime;
-
-        //if (this.flagForFixedUpdate)
-        //{
-        //    foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
-        //    {
-        //        gerbil.GoUnderground(this.IsUnderground);
-        //    }
-        //}
-
         this.flagForFixedUpdate = false;
     }
 
