@@ -56,13 +56,7 @@ public class Human : MonoBehaviour
     {
         if (this.RunningAway)
         {
-            // Take average position of gerbils (add up and divide by # gerbils), then run in opposite direction
-            Vector3 total = GameManager.Instance.GerbilsInSwarm.Aggregate(
-                Vector3.zero,
-                (workingTotal, next) => workingTotal + next.transform.position,
-                workingTotal => workingTotal);
-
-            Vector3 average = total / GameManager.Instance.GerbilsInSwarm.Count;
+            Vector3 average = GameManager.Instance.GetAverageGerbilPosition();
             Vector3 direction = this.rb.position - average;
             float distance = Vector3.Distance(this.rb.position, average);
 

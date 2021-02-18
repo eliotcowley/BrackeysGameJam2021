@@ -10,6 +10,7 @@ public class Constants : MonoBehaviour
     public static string Input_Attack = "Fire1";
     public static string Input_Back = "Cancel";
     public static string Input_Pause = "Pause";
+    public static string Input_Jump = "Jump";
 
     // Tags
     public static string Tag_GerbilMain = "GerbilMain";
