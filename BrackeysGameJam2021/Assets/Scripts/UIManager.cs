@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -12,10 +14,13 @@ public class UIManager : Singleton<UIManager>
     private GameObject gameOverText;
 
     [SerializeField]
-    private GameObject pausedText;
+    private GameObject pausePanel;
 
     [SerializeField]
     private TextMeshProUGUI fpsText;
+
+    [SerializeField]
+    private Selectable pauseFirstSelected;
 
     public void UpdateSwarmCountText()
     {
@@ -27,13 +32,34 @@ public class UIManager : Singleton<UIManager>
         this.gameOverText.SetActive(true);
     }
 
-    public void TogglePauseText(bool show)
+    public void TogglePause(bool show)
     {
-        this.pausedText.SetActive(show);
+        this.pausePanel.SetActive(show);
+
+        if (show)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            this.pauseFirstSelected.Select();
+        }
     }
 
     public void SetFpsText(int fps)
     {
         this.fpsText.SetText($"FPS: {fps}");
+    }
+
+    public void OnResumeButtonPressed()
+    {
+        GameManager.Instance.TogglePause(false);
+    }
+
+    public void OnRestartButtonPressed()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void OnQuitButtonPressed()
+    {
+        GameManager.Instance.Quit();
     }
 }
