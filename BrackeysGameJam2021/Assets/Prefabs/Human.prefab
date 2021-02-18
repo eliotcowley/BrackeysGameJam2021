@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1209293137}
   - component: {fileID: 1209293136}
   - component: {fileID: 9008905225380075163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1554316131}
   - component: {fileID: 1554316133}
   - component: {fileID: 1554316132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 1596068673}
   - component: {fileID: 1596068675}
   - component: {fileID: 1596068674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 98213064138845780}
   - component: {fileID: 5628843681522469213}
   - component: {fileID: 7461257286489513436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,6 +397,8 @@ MonoBehaviour:
   healthBar: {fileID: 1596068674}
   targetAttackingColor: {r: 1, g: 0, b: 0, a: 0}
   distanceToRunAway: 5
+  stationaryTimer: 1
+  newDestinationTimer: 5
 --- !u!195 &5628843681522469213
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -406,7 +408,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7462196522480030878}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6227651
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -445,6 +447,10 @@ PrefabInstance:
     - target: {fileID: 1751673327831936, guid: 7384e233828f7bf4b88aeb1a36a9b104, type: 3}
       propertyPath: m_Name
       value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751673327831936, guid: 7384e233828f7bf4b88aeb1a36a9b104, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1751673327831936, guid: 7384e233828f7bf4b88aeb1a36a9b104, type: 3}
       propertyPath: m_IsActive

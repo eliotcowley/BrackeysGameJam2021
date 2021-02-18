@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8729571167652666853}
   - component: {fileID: 5343030940414876143}
   - component: {fileID: 2310327379782639064}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GerbilFollower
   m_TagString: GerbilFollower
   m_Icon: {fileID: 0}
@@ -71,6 +71,7 @@ MonoBehaviour:
   gerbilDieFXPrefab: {fileID: 7301036371840884185, guid: e803ddbaeadfd1f43a812bc3cd96bf7f,
     type: 3}
   attackInterval: 0.5
+  heightAbovePlayerWhenDigging: 1
 --- !u!65 &2310327379782639064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -95,7 +96,7 @@ GameObject:
   - component: {fileID: 8729571168494596643}
   - component: {fileID: 8729571168494596642}
   - component: {fileID: 8729571168494596669}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
