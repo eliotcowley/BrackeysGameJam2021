@@ -397,8 +397,8 @@ MonoBehaviour:
   healthBar: {fileID: 1596068674}
   targetAttackingColor: {r: 1, g: 0, b: 0, a: 0}
   distanceToRunAway: 5
-  stationaryTimer: 1
-  newDestinationTimer: 5
+  stationaryTimer: 2
+  newDestinationTimer: 1
 --- !u!195 &5628843681522469213
 NavMeshAgent:
   m_ObjectHideFlags: 0
