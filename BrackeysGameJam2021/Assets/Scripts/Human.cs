@@ -38,10 +38,19 @@ public class Human : MonoBehaviour
 
     [SerializeField]
     private float distanceToRunAway;
+
+    [SerializeField]
+    private float stationaryTimer = 1f;
+
+    [SerializeField]
+    private float newDestinationTimer = 5f;
     
     private Material targetMaterial;
     private NavMeshAgent agent;
     private Rigidbody rb;
+    private Vector3 lastVelocity = Vector3.zero;
+    private float timer = 0f;
+    private bool hasSetNewDestination = false;
 
     private void Start()
     {
@@ -60,9 +69,24 @@ public class Human : MonoBehaviour
             Vector3 direction = this.rb.position - average;
             float distance = Vector3.Distance(this.rb.position, average);
 
-            if (distance < this.distanceToRunAway)
+            if ((distance < this.distanceToRunAway) && !this.hasSetNewDestination)
             {
                 this.agent.SetDestination(this.rb.position + direction);
+            }
+
+            this.timer += Time.deltaTime;
+            
+            if (this.timer >= this.stationaryTimer)
+            {
+                if (this.agent.velocity == Vector3.zero && this.lastVelocity == Vector3.zero)
+                {
+                    this.agent.SetDestination(this.rb.position - direction);
+                    this.hasSetNewDestination = true;
+                    StartCoroutine(BackToSimpleRunAway());
+                }
+
+                this.timer = 0f;
+                this.lastVelocity = this.agent.velocity;
             }
         }
     }
@@ -110,5 +134,11 @@ public class Human : MonoBehaviour
     public void SetTargetAttackColor(bool attack)
     {
         this.targetMaterial.color = attack ? this.targetAttackingColor : Color.white;
+    }
+
+    private IEnumerator BackToSimpleRunAway()
+    {
+        yield return new WaitForSeconds(this.newDestinationTimer);
+        this.hasSetNewDestination = false;
     }
 }
