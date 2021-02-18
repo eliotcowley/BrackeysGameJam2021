@@ -22,12 +22,20 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     [SerializeField]
     private float undergroundDepth = 5f;
+
+    [SerializeField]
+    private Renderer groundRenderer;
+
+    [SerializeField]
+    private float groundAlphaWhenUnderground = 0.5f;
     
     private bool flagForFixedUpdate = false;
+    private Color groundMaterialColor;
 
     private void Awake()
     {
         this.Rb = GetComponent<Rigidbody>();
+        this.groundMaterialColor = this.groundRenderer.material.color;
     }
 
     private void Update()
@@ -99,5 +107,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             gerbil.GoUnderground(this.IsUnderground);
         }
+
+        float newAlpha = this.IsUnderground ? this.groundAlphaWhenUnderground : 1f;
+
+        this.groundRenderer.material.color = new Color(
+            this.groundMaterialColor.r, 
+            this.groundMaterialColor.g, 
+            this.groundMaterialColor.b, 
+            newAlpha);
     }
 }

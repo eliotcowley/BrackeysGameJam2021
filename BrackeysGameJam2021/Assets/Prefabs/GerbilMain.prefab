@@ -148,6 +148,8 @@ MonoBehaviour:
   IsUnderground: 0
   speed: 200
   undergroundDepth: 2
+  groundRenderer: {fileID: 0}
+  groundAlphaWhenUnderground: 0.5
 --- !u!114 &6081404915054551840
 MonoBehaviour:
   m_ObjectHideFlags: 0
