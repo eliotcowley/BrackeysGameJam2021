@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (Input.GetButtonDown(Constants.Input_Attack))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Restart();
             }
 
             if (Input.GetButtonDown(Constants.Input_Back))
@@ -47,19 +47,6 @@ public class GameManager : Singleton<GameManager>
                 TogglePause(!this.paused);
             }
         }
-
-        if (this.paused)
-        {
-            if (Input.GetButtonDown(Constants.Input_Attack))
-            {
-                TogglePause(false);
-            }
-
-            if (Input.GetButtonDown(Constants.Input_Back))
-            {
-                Quit();
-            }
-        }
     }
 
     public void GameOver()
@@ -69,15 +56,29 @@ public class GameManager : Singleton<GameManager>
         this.gameOver = true;
     }
 
-    private void TogglePause(bool paused)
+    public void TogglePause(bool paused)
     {
         this.paused = paused;
-        UIManager.Instance.TogglePauseText(this.paused);
+        UIManager.Instance.TogglePause(this.paused);
         Time.timeScale = this.paused ? 0f : 1f;
-        PlayerMovement.Instance.CanMove = !this.paused;
+
+        if (this.paused)
+        {
+            PlayerMovement.Instance.CanMove = false;
+        }
+        else
+        {
+            StartCoroutine(EnableMovementAfterDelay());
+        }
     }
 
-    private void Quit()
+    private IEnumerator EnableMovementAfterDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        PlayerMovement.Instance.CanMove = true;
+    }
+
+    public void Quit()
     {
         if (Application.isEditor)
         {
@@ -104,5 +105,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         UIManager.Instance.SetFpsText(this.lastFps);
+    }
+
+    public void Restart()
+    {
+        TogglePause(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
