@@ -18,4 +18,5 @@ public class Constants : MonoBehaviour
 
     // Animation
     public static string Anim_DoorOpen = "DoorOpen";
+    public static string Anim_TrapCatch = "Catch";
 }
