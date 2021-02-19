@@ -44,6 +44,9 @@ public class Human : MonoBehaviour
 
     [SerializeField]
     private float newDestinationTimer = 5f;
+
+    [SerializeField]
+    private GameObject gerbilPrefab;
     
     private Material targetMaterial;
     private NavMeshAgent agent;
@@ -134,6 +137,7 @@ public class Human : MonoBehaviour
         if (this.Health <= 0f)
         {
             Instantiate(this.dieFXPrefab, this.transform.position, Quaternion.identity);
+            Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
             GerbilAttack.Instance.StopAttacking();
             GerbilAttack.Instance.TargetHuman = null;
             Destroy(this.gameObject);
