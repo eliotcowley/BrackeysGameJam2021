@@ -23,9 +23,6 @@ public class GerbilFollower : MonoBehaviour
     private float maxDistanceFromCenter = 2f;
 
     [SerializeField]
-    private float deathY = -10f;
-
-    [SerializeField]
     private GameObject gerbilDieFXPrefab;
 
     [SerializeField]
@@ -76,7 +73,7 @@ public class GerbilFollower : MonoBehaviour
             }
         }
 
-        if (this.rb.position.y < this.deathY)
+        if (this.rb.position.y < GameManager.Instance.DeathY)
         {
             Die();
         }
@@ -92,6 +89,14 @@ public class GerbilFollower : MonoBehaviour
                 GameManager.Instance.GerbilsInSwarm.Add(this);
                 UIManager.Instance.UpdateSwarmCountText();
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag(Constants.Tag_BowlingBall))
+        {
+            Die();
         }
     }
 
