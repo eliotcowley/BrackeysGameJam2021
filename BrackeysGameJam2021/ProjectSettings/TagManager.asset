@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GerbilFollower
   - GerbilMain
+  - BowlingBall
   layers:
   - Default
   - TransparentFX

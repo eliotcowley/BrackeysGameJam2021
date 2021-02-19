@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public List<GerbilFollower> GerbilsInSwarm;
 
+    [HideInInspector]
+    public float DeathY = -10f;
+
     private bool gameOver = false;
     private bool paused = false;
     private bool levelWon = false;

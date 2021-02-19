@@ -15,6 +15,7 @@ public class Constants : MonoBehaviour
     // Tags
     public static string Tag_GerbilMain = "GerbilMain";
     public static string Tag_GerbilFollower = "GerbilFollower";
+    public static string Tag_BowlingBall = "BowlingBall";
 
     // Animation
     public static string Anim_DoorOpen = "DoorOpen";
