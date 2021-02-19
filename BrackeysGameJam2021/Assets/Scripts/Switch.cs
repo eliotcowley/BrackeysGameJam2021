@@ -15,7 +15,7 @@ public class Switch : MonoBehaviour
     private float onYPosition = -0.02f;
 
     [SerializeField]
-    private Animator doorAnimator;
+    private Door door;
 
     private int gerbilsOnSwitch = 0;
     public int GerbilsOnSwitch
@@ -71,7 +71,7 @@ public class Switch : MonoBehaviour
             this.onYPosition, 
             this.buttonGO.transform.localPosition.z);
 
-        this.doorAnimator.SetTrigger(Constants.Anim_DoorOpen);
+        this.door.Open();
     }
 
     private void UpdateCounterText()

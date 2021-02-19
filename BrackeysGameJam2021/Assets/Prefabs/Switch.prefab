@@ -259,6 +259,7 @@ MonoBehaviour:
   gerbilsRequired: 4
   buttonGO: {fileID: 4678002950047310888}
   onYPosition: -0.02
+  door: {fileID: 0}
 --- !u!1 &4678002950047310888
 GameObject:
   m_ObjectHideFlags: 0

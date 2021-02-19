@@ -83,12 +83,7 @@ public class GerbilFollower : MonoBehaviour
     {
         if (other.CompareTag(Constants.Tag_GerbilMain))
         {
-            if (!this.InSwarm && !GerbilAttack.Instance.IsAttacking && !PlayerMovement.Instance.IsUnderground)
-            {
-                this.InSwarm = true;
-                GameManager.Instance.GerbilsInSwarm.Add(this);
-                UIManager.Instance.UpdateSwarmCountText();
-            }
+            TryAddToSwarm();
         }
     }
 
@@ -97,6 +92,15 @@ public class GerbilFollower : MonoBehaviour
         if (collision.collider.CompareTag(Constants.Tag_BowlingBall))
         {
             Die();
+        }
+        else if (collision.collider.CompareTag(Constants.Tag_GerbilFollower))
+        {
+            GerbilFollower gerbil = collision.collider.GetComponent<GerbilFollower>();
+
+            if (!gerbil.InSwarm)
+            {
+                gerbil.TryAddToSwarm();
+            }
         }
     }
 
@@ -142,5 +146,15 @@ public class GerbilFollower : MonoBehaviour
         this.rb.useGravity = true;
         this.InSwarm = false;
         GameManager.Instance.GerbilsInSwarm.Remove(this);
+    }
+
+    public void TryAddToSwarm()
+    {
+        if (!this.InSwarm && !GerbilAttack.Instance.IsAttacking && !PlayerMovement.Instance.IsUnderground)
+        {
+            this.InSwarm = true;
+            GameManager.Instance.GerbilsInSwarm.Add(this);
+            UIManager.Instance.UpdateSwarmCountText();
+        }
     }
 }
