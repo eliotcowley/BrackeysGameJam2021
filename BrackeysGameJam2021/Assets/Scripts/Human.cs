@@ -51,6 +51,7 @@ public class Human : MonoBehaviour
     private Vector3 lastVelocity = Vector3.zero;
     private float timer = 0f;
     private bool hasSetNewDestination = false;
+    private Animator animator;
 
     private void Start()
     {
@@ -59,6 +60,7 @@ public class Human : MonoBehaviour
         this.targetMaterial = this.Target.GetComponent<Renderer>().material;
         this.agent = GetComponent<NavMeshAgent>();
         this.rb = GetComponent<Rigidbody>();
+        this.animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -69,13 +71,8 @@ public class Human : MonoBehaviour
             Vector3 direction = this.rb.position - average;
             float distance = Vector3.Distance(this.rb.position, average);
 
-            if ((distance < this.distanceToRunAway) && !this.hasSetNewDestination)
-            {
-                this.agent.SetDestination(this.rb.position + direction);
-            }
-
             this.timer += Time.deltaTime;
-            
+
             if (this.timer >= this.stationaryTimer)
             {
                 if (this.agent.velocity == Vector3.zero && this.lastVelocity == Vector3.zero)
@@ -87,6 +84,18 @@ public class Human : MonoBehaviour
 
                 this.timer = 0f;
                 this.lastVelocity = this.agent.velocity;
+            }
+
+            if (distance < this.distanceToRunAway)
+            {
+                if (!this.hasSetNewDestination)
+                {
+                    this.agent.SetDestination(this.rb.position + direction);
+                }
+            }
+            else
+            {
+                StopRunning();
             }
         }
     }
@@ -140,5 +149,16 @@ public class Human : MonoBehaviour
     {
         yield return new WaitForSeconds(this.newDestinationTimer);
         this.hasSetNewDestination = false;
+    }
+
+    public void SetRunningAnimation()
+    {
+        this.animator.SetBool(Constants.Anim_Run, true);
+    }
+
+    private void StopRunning()
+    {
+        this.animator.SetBool(Constants.Anim_Run, false);
+        this.RunningAway = false;
     }
 }

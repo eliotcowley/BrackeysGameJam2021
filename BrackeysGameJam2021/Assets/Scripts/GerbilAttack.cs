@@ -43,6 +43,7 @@ public class GerbilAttack : Singleton<GerbilAttack>
         this.IsAttacking = true;
         this.TargetHuman.SetTargetAttackColor(true);
         this.TargetHuman.RunningAway = true;
+        this.TargetHuman.SetRunningAnimation();
 
         // Move gerbils toward human
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
