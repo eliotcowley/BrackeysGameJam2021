@@ -352,6 +352,8 @@ MonoBehaviour:
   distanceToRunAway: 5
   stationaryTimer: 2
   newDestinationTimer: 1
+  gerbilPrefab: {fileID: 8729571167652666854, guid: 9e8350662e21c0c49a75df03b5f6d455,
+    type: 3}
 --- !u!195 &5628843681522469213
 NavMeshAgent:
   m_ObjectHideFlags: 0
