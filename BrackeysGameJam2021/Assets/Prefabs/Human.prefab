@@ -349,7 +349,7 @@ MonoBehaviour:
   canvasTransform: {fileID: 1209293135}
   healthBar: {fileID: 1596068674}
   targetAttackingColor: {r: 1, g: 0, b: 0, a: 0}
-  distanceToRunAway: 5
+  distanceToRunAway: 10
   stationaryTimer: 2
   newDestinationTimer: 1
   gerbilPrefab: {fileID: 8729571167652666854, guid: 9e8350662e21c0c49a75df03b5f6d455,

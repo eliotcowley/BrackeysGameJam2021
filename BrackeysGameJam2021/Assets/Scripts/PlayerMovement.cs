@@ -57,7 +57,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
             if (Input.GetButtonDown(Constants.Input_Attack) 
                 && !this.flagForFixedUpdate 
                 && GerbilAttack.Instance.TargetHuman == null
-                && this.digTimer >= this.digDelay)
+                && this.digTimer >= this.digDelay
+                && LevelBounds.Instance.IsInLevelBounds(this.Rb.position))
             {
                 ToggleUnderground();
             }

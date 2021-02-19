@@ -13,7 +13,7 @@ public class LevelBounds : Singleton<LevelBounds>
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(Constants.Tag_GerbilFollower))
+        if (other.CompareTag(Constants.Tag_GerbilFollower) && PlayerMovement.Instance.IsUnderground)
         {
             other.GetComponent<GerbilFollower>().Fall();
         }
