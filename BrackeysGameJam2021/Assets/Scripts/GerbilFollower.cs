@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,10 +34,12 @@ public class GerbilFollower : MonoBehaviour
 
     private Rigidbody rb;
     private float attackTimer = 0f;
+    private CinemachineImpulseSource cinemachineImpulseSource;
 
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
+        this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void FixedUpdate()
@@ -115,6 +118,7 @@ public class GerbilFollower : MonoBehaviour
             GameManager.Instance.GameOver();
         }
 
+        this.cinemachineImpulseSource.GenerateImpulse();
         Destroy(this.gameObject);
     }
 
