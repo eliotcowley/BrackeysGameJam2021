@@ -32,14 +32,19 @@ public class GerbilFollower : MonoBehaviour
     [SerializeField]
     private float heightAbovePlayerWhenDigging = 1f;
 
+    [SerializeField]
+    private float idleSpeed = 0.1f;
+
     private Rigidbody rb;
     private float attackTimer = 0f;
     private CinemachineImpulseSource cinemachineImpulseSource;
+    private Animator animator;
 
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
         this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        this.animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -80,6 +85,23 @@ public class GerbilFollower : MonoBehaviour
         {
             Die();
         }
+
+        if (this.animator.GetBool(Constants.Anim_IsWalking))
+        {
+            if (this.rb.velocity.magnitude <= this.idleSpeed)
+            {
+                this.animator.SetBool(Constants.Anim_IsWalking, false);
+                this.animator.speed = 0f;
+            }
+        }
+        else
+        {
+            if (this.rb.velocity.magnitude >= this.idleSpeed)
+            {
+                this.animator.SetBool(Constants.Anim_IsWalking, true);
+                this.animator.speed = 1f;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,13 +114,13 @@ public class GerbilFollower : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag(Constants.Tag_BowlingBall))
+        if (collision.gameObject.CompareTag(Constants.Tag_BowlingBall))
         {
             Die();
         }
-        else if (collision.collider.CompareTag(Constants.Tag_GerbilFollower))
+        else if (collision.gameObject.CompareTag(Constants.Tag_GerbilFollower))
         {
-            GerbilFollower gerbil = collision.collider.GetComponent<GerbilFollower>();
+            GerbilFollower gerbil = collision.gameObject.GetComponentInParent<GerbilFollower>();
 
             if (!gerbil.InSwarm)
             {
