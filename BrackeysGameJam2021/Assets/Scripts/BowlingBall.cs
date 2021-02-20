@@ -16,7 +16,7 @@ public class BowlingBall : MonoBehaviour
     private void Start()
     {
         this.rb = GetComponent<Rigidbody>();
-        this.startPos = this.rb.position;
+        this.startPos = this.transform.GetChild(0).transform.position;
     }
 
     private void FixedUpdate()

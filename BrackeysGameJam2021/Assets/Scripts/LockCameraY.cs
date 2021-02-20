@@ -10,6 +10,8 @@ public class LockCameraY : CinemachineExtension
     [Tooltip("Lock the camera's Y position to this value")]
     public float YPosition = 10f;
 
+    public float XRotation;
+
     protected override void PostPipelineStageCallback(
         CinemachineVirtualCameraBase vcam,
         CinemachineCore.Stage stage, 
@@ -21,6 +23,11 @@ public class LockCameraY : CinemachineExtension
             var pos = state.RawPosition;
             pos.y = this.YPosition;
             state.RawPosition = pos;
+
+            Quaternion rot = state.RawOrientation;
+            Vector3 rotVec = rot.eulerAngles;
+            rotVec.x = this.XRotation;
+            state.RawOrientation = Quaternion.Euler(rotVec);
         }
     }
 }
