@@ -1,9 +1,27 @@
 fileFormatVersion: 2
-guid: fc1af2ce4ba3c044888df349423dcac6
+guid: a6e636463dfc7eb4eb6d61998b84ccfe
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: 5cf7b5ff2e27d35488fe2563c3251dc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes
+    second: {fileID: 2100000, guid: 6b7509d9e04171b41ae80a13d222d023, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Feet
+    second: {fileID: 2100000, guid: e346487b2a8457548a7cd98638819ccf, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
