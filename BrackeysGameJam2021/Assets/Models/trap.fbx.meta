@@ -30,7 +30,12 @@ ModelImporter:
   - first:
       74: -5027858975784619058
     second: Base|Jaw2Action
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: fa2a507ca850bf649960dff7d8748a8f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
