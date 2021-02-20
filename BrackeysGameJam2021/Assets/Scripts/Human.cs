@@ -110,6 +110,12 @@ public class Human : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Constants.Tag_GerbilMain) && !GerbilAttack.Instance.IsAttacking)
         {
+            if (GerbilAttack.Instance.TargetHuman != null)
+            {
+                GerbilAttack.Instance.TargetHuman.Target.SetActive(false);
+                GerbilAttack.Instance.TargetHuman.ButtonIcon.SetActive(false);
+            }
+
             this.Target.SetActive(true);
             this.ButtonIcon.SetActive(true);
             GerbilAttack.Instance.TargetHuman = this;

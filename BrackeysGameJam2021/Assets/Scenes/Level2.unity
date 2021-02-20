@@ -1035,6 +1035,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3859622316027999651, guid: 00592f241901f004790e885c04c2ed75,
+        type: 3}
+      propertyPath: m_text
+      value: Press Y / E to reset camera
+      objectReference: {fileID: 0}
     - target: {fileID: 4155633771251776184, guid: 00592f241901f004790e885c04c2ed75,
         type: 3}
       propertyPath: m_Follow
