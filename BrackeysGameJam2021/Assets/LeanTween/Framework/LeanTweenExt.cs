@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public static class LeanTweenExt
 {
@@ -16,6 +17,19 @@ public static class LeanTweenExt
     public static LTDescr LeanAlpha(this CanvasGroup canvas, float to, float time) { return LeanTween.alphaCanvas(canvas, to, time); }
     //LeanTween.alphaText
     public static LTDescr LeanAlphaText(this RectTransform rectTransform, float to, float time) { return LeanTween.alphaText(rectTransform, to, time); }
+
+    public static LTDescr LeanAlphaText(this TextMeshProUGUI textMesh, float to, float time)
+    {
+        var _color = textMesh.color;
+        var _tween = LeanTween
+            .value(textMesh.gameObject, _color.a, to, time)
+            .setOnUpdate((float _value) => {
+                _color.a = _value;
+                textMesh.color = _color;
+            });
+        return _tween;
+    }
+
     //LeanTween.cancel
     public static void LeanCancel(this GameObject gameObject) { LeanTween.cancel(gameObject); }
     public static void LeanCancel(this GameObject gameObject, bool callOnComplete) { LeanTween.cancel(gameObject, callOnComplete); }

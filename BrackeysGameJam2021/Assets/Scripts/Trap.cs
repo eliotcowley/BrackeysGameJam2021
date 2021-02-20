@@ -17,7 +17,7 @@ public class Trap : MonoBehaviour
         if (other.CompareTag(Constants.Tag_GerbilFollower))
         {
             this.animator.SetTrigger(Constants.Anim_TrapCatch);
-            other.GetComponent<GerbilFollower>().Die();
+            other.GetComponentInParent<GerbilFollower>().Die();
         }
     }
 }
