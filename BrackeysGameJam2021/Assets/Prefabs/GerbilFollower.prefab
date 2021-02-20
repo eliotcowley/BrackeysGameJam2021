@@ -98,12 +98,12 @@ MonoBehaviour:
   Attacking: 0
   speed: 50
   turnSpeed: 0.2
-  maxDistanceFromCenter: 2
+  maxDistanceFromCenter: 3
   gerbilDieFXPrefab: {fileID: 7301036371840884185, guid: e803ddbaeadfd1f43a812bc3cd96bf7f,
     type: 3}
   attackInterval: 0.5
   heightAbovePlayerWhenDigging: 1
-  idleSpeed: 1
+  idleSpeed: 3
 --- !u!114 &7649277569117410821
 MonoBehaviour:
   m_ObjectHideFlags: 0

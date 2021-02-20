@@ -25,6 +25,20 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private GameObject winText;
 
+    [SerializeField]
+    private TextMeshProUGUI tutorialText;
+
+    [SerializeField]
+    private float textFadeTime = 1f;
+
+    [SerializeField]
+    private float textFadeDelay = 5f;
+
+    private void Start()
+    {
+        this.tutorialText.LeanAlphaText(0f, this.textFadeTime).setDelay(this.textFadeDelay);
+    }
+
     public void UpdateSwarmCountText()
     {
         this.swarmCountText.SetText(GameManager.Instance.GerbilsInSwarm.Count.ToString());
