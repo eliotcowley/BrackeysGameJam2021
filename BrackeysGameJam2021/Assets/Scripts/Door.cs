@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +11,16 @@ public class Door : MonoBehaviour
     [SerializeField]
     private float lerpTime = 1f;
 
+    private CinemachineImpulseSource cinemachineImpulseSource;
+
+    private void Start()
+    {
+        this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+    }
+
     public void Open()
     {
         LeanTween.moveY(this.gameObject, this.transform.position.y + this.moveY, this.lerpTime);
+        this.cinemachineImpulseSource.GenerateImpulse();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -55,6 +56,7 @@ public class Human : MonoBehaviour
     private float timer = 0f;
     private bool hasSetNewDestination = false;
     private Animator animator;
+    private CinemachineImpulseSource cinemachineImpulseSource;
 
     private void Start()
     {
@@ -64,6 +66,7 @@ public class Human : MonoBehaviour
         this.agent = GetComponent<NavMeshAgent>();
         this.rb = GetComponent<Rigidbody>();
         this.animator = GetComponent<Animator>();
+        this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void Update()
@@ -140,6 +143,7 @@ public class Human : MonoBehaviour
             Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
             GerbilAttack.Instance.StopAttacking();
             GerbilAttack.Instance.TargetHuman = null;
+            this.cinemachineImpulseSource.GenerateImpulse();
             Destroy(this.gameObject);
         }
     }
