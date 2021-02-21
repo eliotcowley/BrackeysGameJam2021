@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class MusicController : Singleton<MusicController>
 {
-    private void Start()
+    [SerializeField]
+    private AudioClip mainSong;
+
+    [SerializeField]
+    private AudioClip bossSong;
+
+    private AudioSource audioSource;
+
+    private void Awake()
     {
         if (FindObjectsOfType<MusicController>().Length > 1)
         {
@@ -12,5 +20,23 @@ public class MusicController : Singleton<MusicController>
         }
 
         DontDestroyOnLoad(this.gameObject);
+        this.audioSource = GetComponent<AudioSource>();
+
+        if (GameManager.Instance.Level == 10)
+        {
+            PlayBossSong();
+        }
+    }
+
+    public void PlayMainSong()
+    {
+        this.audioSource.clip = this.mainSong;
+        this.audioSource.Play();
+    }
+
+    public void PlayBossSong()
+    {
+        this.audioSource.clip = this.bossSong;
+        this.audioSource.Play();
     }
 }

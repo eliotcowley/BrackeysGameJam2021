@@ -57,9 +57,17 @@ public class GameManager : Singleton<GameManager>
         this.Level = SceneManager.GetActiveScene().buildIndex;
     }
 
+    private void Start()
+    {
+        if (this.Level == 10)
+        {
+            MusicController.Instance.PlayBossSong();
+        }
+    }
+
     private void Update()
     {
-        CalculateFps();
+        //CalculateFps();
 
         if (this.gameOver)
         {
@@ -88,6 +96,12 @@ public class GameManager : Singleton<GameManager>
                 GoToNextLevel();
             }
         }
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Win();
+        }
+#endif
     }
 
     public void GameOver()

@@ -45,6 +45,7 @@ public class MainMenuController : MonoBehaviour
         StartCoroutine(SpawnGerbil());
         Time.timeScale = 0.1f;
         MusicController.Instance.Init();
+        MusicController.Instance.PlayMainSong();
     }
 
     public void OnStartButtonPressed()

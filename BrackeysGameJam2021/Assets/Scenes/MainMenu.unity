@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2941,6 +2941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f9abc714beaa54b9d43cb0adf7e5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainSong: {fileID: 8300000, guid: a8dad858e11b4d44db03709d116e4c19, type: 3}
+  bossSong: {fileID: 8300000, guid: 40c91bba5a244fd4b8355d1252317657, type: 3}
 --- !u!1 &1968508074
 GameObject:
   m_ObjectHideFlags: 0
