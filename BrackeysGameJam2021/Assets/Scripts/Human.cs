@@ -153,6 +153,7 @@ public class Human : MonoBehaviour
         }
         else if (other.CompareTag("GerbilBEEG"))
         {
+            other.transform.parent.Find("laugh").GetComponent<AudioSource>().Play();
             TakeDamage(100f);
         }
     }
