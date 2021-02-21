@@ -35,6 +35,9 @@ public class GerbilFollower : MonoBehaviour
     [SerializeField]
     private float idleSpeed = 0.1f;
 
+    [SerializeField]
+    private bool BEEG = false;
+
     private Rigidbody rb;
     private float attackTimer = 0f;
     private CinemachineImpulseSource cinemachineImpulseSource;
@@ -95,20 +98,23 @@ public class GerbilFollower : MonoBehaviour
             Die();
         }
 
-        if (this.animator.GetBool(Constants.Anim_IsWalking))
+        if (!this.BEEG)
         {
-            if (this.rb.velocity.magnitude <= this.idleSpeed)
+            if (this.animator.GetBool(Constants.Anim_IsWalking))
             {
-                this.animator.SetBool(Constants.Anim_IsWalking, false);
-                this.animator.speed = 0f;
+                if (this.rb.velocity.sqrMagnitude <= this.idleSpeed)
+                {
+                    this.animator.SetBool(Constants.Anim_IsWalking, false);
+                    this.animator.speed = 0f;
+                }
             }
-        }
-        else
-        {
-            if (this.rb.velocity.magnitude >= this.idleSpeed)
+            else
             {
-                this.animator.SetBool(Constants.Anim_IsWalking, true);
-                this.animator.speed = 1f;
+                if (this.rb.velocity.sqrMagnitude >= this.idleSpeed)
+                {
+                    this.animator.SetBool(Constants.Anim_IsWalking, true);
+                    this.animator.speed = 1f;
+                }
             }
         }
     }
@@ -155,7 +161,10 @@ public class GerbilFollower : MonoBehaviour
 
     public void GoUnderground(bool underground)
     {
-        StartCoroutine(GoUndergroundCoroutine(underground));
+        if (!this.BEEG)
+        {
+            StartCoroutine(GoUndergroundCoroutine(underground));
+        }
     }
 
     private IEnumerator GoUndergroundCoroutine(bool underground)

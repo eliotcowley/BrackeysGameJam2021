@@ -78,10 +78,29 @@ public class Human : MonoBehaviour
         {
             this.key.SetActive(false);
         }
+
+        if (GameManager.Instance.Level == 10)
+        {
+            this.distanceToRunAway = 100f;
+            this.RunningAway = true;
+            SetRunningAnimation();
+        }
     }
 
     private void Update()
     {
+        //if (GameManager.Instance.Level == 10)
+        //{
+        //    Vector3 average = GameManager.Instance.GetAverageGerbilPosition();
+        //    float distance = Vector3.Distance(this.rb.position, average);
+
+        //    if (distance <= 20f)
+        //    {
+        //        this.RunningAway = true;
+        //        SetRunningAnimation();
+        //    }
+        //}
+
         if (this.RunningAway)
         {
             Vector3 average = GameManager.Instance.GetAverageGerbilPosition();
@@ -119,7 +138,7 @@ public class Human : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(Constants.Tag_GerbilMain) && !GerbilAttack.Instance.IsAttacking)
+        if (other.gameObject.CompareTag(Constants.Tag_GerbilMain) && !GerbilAttack.Instance.IsAttacking && GameManager.Instance.Level != 10)
         {
             if (GerbilAttack.Instance.TargetHuman != null)
             {
@@ -132,10 +151,19 @@ public class Human : MonoBehaviour
             GerbilAttack.Instance.TargetHuman = this;
             this.InAttackRange = true;
         }
+        else if (other.CompareTag("GerbilBEEG"))
+        {
+            TakeDamage(100f);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (GameManager.Instance.Level == 10)
+        {
+            return;
+        }
+
         if (other.gameObject.CompareTag(Constants.Tag_GerbilMain))
         {
             this.ButtonIcon.SetActive(false);
@@ -195,6 +223,11 @@ public class Human : MonoBehaviour
 
     private void StopRunning()
     {
+        //if (GameManager.Instance.Level == 10)
+        //{
+        //    return;
+        //}
+
         this.animator.SetBool(Constants.Anim_Run, false);
         this.RunningAway = false;
         this.agent.SetDestination(this.rb.position);

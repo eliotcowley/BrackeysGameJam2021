@@ -55,16 +55,20 @@ public class GerbilAttack : Singleton<GerbilAttack>
     public void StopAttacking()
     {
         this.IsAttacking = false;
-        this.TargetHuman.SetTargetAttackColor(false);
-        
-        if (this.TargetHuman.InAttackRange)
+
+        if (this.TargetHuman != null)
         {
-            this.TargetHuman.ButtonIcon.SetActive(true);
-        }
-        else
-        {
-            this.TargetHuman.Target.SetActive(false);
-            this.TargetHuman = null;
+            this.TargetHuman.SetTargetAttackColor(false);
+
+            if (this.TargetHuman.InAttackRange)
+            {
+                this.TargetHuman.ButtonIcon.SetActive(true);
+            }
+            else
+            {
+                this.TargetHuman.Target.SetActive(false);
+                this.TargetHuman = null;
+            }
         }
 
         foreach (GerbilFollower gerbil in GameManager.Instance.GerbilsInSwarm)
