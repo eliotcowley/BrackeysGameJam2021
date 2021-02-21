@@ -191,5 +191,6 @@ public class Human : MonoBehaviour
     {
         this.animator.SetBool(Constants.Anim_Run, false);
         this.RunningAway = false;
+        this.agent.SetDestination(this.rb.position);
     }
 }

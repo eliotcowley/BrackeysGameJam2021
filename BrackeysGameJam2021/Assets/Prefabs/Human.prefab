@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 7461257286489513436}
   - component: {fileID: 4150285753355234759}
   - component: {fileID: 152768924}
+  - component: {fileID: 8928270445163384436}
   m_Layer: 8
   m_Name: Human
   m_TagString: Untagged
@@ -355,8 +356,7 @@ MonoBehaviour:
   newDestinationTimer: 1
   gerbilPrefab: {fileID: 8729571167652666854, guid: 9e8350662e21c0c49a75df03b5f6d455,
     type: 3}
-  keyPrefab: {fileID: 8952721695286001574, guid: 1309103beef547f458d0a07ba60647db,
-    type: 3}
+  key: {fileID: 0}
   dropsKey: 0
 --- !u!195 &5628843681522469213
 NavMeshAgent:
@@ -457,6 +457,20 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 1000
     m_PropagationSpeed: 343
+--- !u!136 &8928270445163384436
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7462196522480030878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: 0, y: -3, z: 0}
 --- !u!1001 &3892967763842244056
 PrefabInstance:
   m_ObjectHideFlags: 0
