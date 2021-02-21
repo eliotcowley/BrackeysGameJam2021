@@ -47,7 +47,7 @@ public class GerbilFollower : MonoBehaviour
     private AudioSource addAudioSource;
     private AudioLowPassFilter soundFilter;
 
-    private void Start()
+    private void Awake()
     {
         this.rb = GetComponent<Rigidbody>();
         this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
