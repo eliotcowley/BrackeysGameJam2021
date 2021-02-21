@@ -43,11 +43,9 @@ public class GerbilFollower : MonoBehaviour
     private CinemachineImpulseSource cinemachineImpulseSource;
     private Animator animator;
 
-    [SerializeField]
     private AudioSource walkAudioSource;
-
-    [SerializeField]
     private AudioSource addAudioSource;
+    private AudioLowPassFilter soundFilter;
 
     private void Start()
     {
@@ -57,12 +55,18 @@ public class GerbilFollower : MonoBehaviour
         this.animator.SetBool(Constants.Anim_IsWalking, false);
         this.animator.speed = 0f;
         this.rb.velocity = Vector3.zero;
+        this.addAudioSource = GetComponent<AudioSource>();
+        this.walkAudioSource = this.transform.Find("gerbel").GetComponent<AudioSource>();
+        this.soundFilter = this.transform.Find("gerbel").GetComponent<AudioLowPassFilter>();
         
         // Set random values for the fur shader
         MeshRenderer gerbelMesh = transform.Find("gerbel").GetComponent<MeshRenderer>();
         gerbelMesh.material.SetColor("Primary", Random.ColorHSV());
         gerbelMesh.material.SetColor("Secondary", Random.ColorHSV());
         gerbelMesh.material.SetFloat("Rotation", Random.Range(-10, 10));
+
+        // Put the walking sound at a random offset
+        this.walkAudioSource.time = Random.Range(0, this.walkAudioSource.clip.length);
     }
 
     private void FixedUpdate()
@@ -112,7 +116,6 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, false);
                     this.animator.speed = 0f;
-                    this.walkAudioSource.Stop();
                 }
             }
             else
@@ -121,8 +124,14 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, true);
                     this.animator.speed = 1f;
-                    this.walkAudioSource.Play();
                 }
+            }
+
+            // Set the walking sound accordingly
+            if (this.animator.GetBool(Constants.Anim_IsWalking)) {
+                this.walkAudioSource.UnPause();
+            } else {
+                this.walkAudioSource.Pause();
             }
         }
     }
@@ -189,6 +198,9 @@ public class GerbilFollower : MonoBehaviour
             if (underground)
             {
                 this.rb.constraints = RigidbodyConstraints.FreezePositionY;
+                this.soundFilter.enabled = true;
+            } else {
+                this.soundFilter.enabled = false;
             }
         }
     }
