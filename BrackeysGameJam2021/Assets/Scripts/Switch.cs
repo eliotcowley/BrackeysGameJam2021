@@ -42,7 +42,7 @@ public class Switch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!this.on && other.CompareTag(Constants.Tag_GerbilFollower))
+        if (!this.on && (other.CompareTag(Constants.Tag_GerbilFollower) || other.CompareTag("GerbilBEEG")))
         {
             this.GerbilsOnSwitch++;
 
