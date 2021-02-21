@@ -48,6 +48,12 @@ public class Human : MonoBehaviour
 
     [SerializeField]
     private GameObject gerbilPrefab;
+
+    [SerializeField]
+    private GameObject key;
+
+    [SerializeField]
+    private bool dropsKey = false;
     
     private Material targetMaterial;
     private NavMeshAgent agent;
@@ -67,6 +73,7 @@ public class Human : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.animator = GetComponent<Animator>();
         this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        this.key.SetActive(false);
     }
 
     private void Update()
@@ -146,10 +153,20 @@ public class Human : MonoBehaviour
         if (this.Health <= 0f)
         {
             Instantiate(this.dieFXPrefab, this.transform.position, Quaternion.identity);
-            Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
             GerbilAttack.Instance.StopAttacking();
             GerbilAttack.Instance.TargetHuman = null;
             this.cinemachineImpulseSource.GenerateImpulse();
+
+            if (this.dropsKey)
+            {
+                this.key.transform.position = new Vector3(this.transform.position.x, this.key.transform.position.y, this.transform.position.z);
+                this.key.SetActive(true);
+            }
+            else
+            {
+                Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
+            }
+            
             Destroy(this.gameObject);
         }
     }

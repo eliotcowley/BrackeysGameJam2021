@@ -355,6 +355,9 @@ MonoBehaviour:
   newDestinationTimer: 1
   gerbilPrefab: {fileID: 8729571167652666854, guid: 9e8350662e21c0c49a75df03b5f6d455,
     type: 3}
+  keyPrefab: {fileID: 8952721695286001574, guid: 1309103beef547f458d0a07ba60647db,
+    type: 3}
+  dropsKey: 0
 --- !u!195 &5628843681522469213
 NavMeshAgent:
   m_ObjectHideFlags: 0
