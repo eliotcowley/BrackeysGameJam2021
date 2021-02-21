@@ -34,9 +34,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private float textFadeDelay = 5f;
 
+    [SerializeField]
+    private TextMeshProUGUI levelText;
+
     private void Start()
     {
         this.tutorialText.LeanAlphaText(0f, this.textFadeTime).setDelay(this.textFadeDelay);
+        UpdateLevelText(GameManager.Instance.Level);
     }
 
     public void UpdateSwarmCountText()
@@ -83,5 +87,10 @@ public class UIManager : Singleton<UIManager>
     public void ShowWinText()
     {
         this.winText.SetActive(true);
+    }
+
+    public void UpdateLevelText(int level)
+    {
+        this.levelText.SetText($"Level\n{level} / 10");
     }
 }

@@ -170,6 +170,7 @@ public class Human : MonoBehaviour
             {
                 GameObject gerbil = Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
                 gerbil.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                gerbil.GetComponent<GerbilFollower>().TryAddToSwarm();
             }
             
             Destroy(this.gameObject);
