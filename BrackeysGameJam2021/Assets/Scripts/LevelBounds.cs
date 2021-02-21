@@ -15,7 +15,7 @@ public class LevelBounds : Singleton<LevelBounds>
     {
         if (other.CompareTag(Constants.Tag_GerbilFollower) && PlayerMovement.Instance.IsUnderground)
         {
-            other.GetComponent<GerbilFollower>().Fall();
+            other.GetComponentInParent<GerbilFollower>().Fall();
         }
     }
 
