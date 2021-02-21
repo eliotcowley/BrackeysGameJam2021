@@ -74,14 +74,11 @@ public class MainMenuController : MonoBehaviour
 
     public void OnQuitButtonPressed()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void OnBackButtonPressed()
