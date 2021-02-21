@@ -73,7 +73,11 @@ public class Human : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.animator = GetComponent<Animator>();
         this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
-        this.key.SetActive(false);
+
+        if (this.dropsKey)
+        {
+            this.key.SetActive(false);
+        }
     }
 
     private void Update()
