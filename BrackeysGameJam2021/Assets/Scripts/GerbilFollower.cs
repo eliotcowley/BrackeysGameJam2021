@@ -45,6 +45,8 @@ public class GerbilFollower : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         this.animator = GetComponentInChildren<Animator>();
+        this.animator.SetBool(Constants.Anim_IsWalking, false);
+        this.animator.speed = 0f;
     }
 
     private void FixedUpdate()
