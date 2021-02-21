@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
     private float fpsTimer = 0f;
     private int lastFps = 0;
 
-    private void Start()
+    private void Awake()
     {
         this.GerbilsInSwarm = new List<GerbilFollower>();
         this.Level = SceneManager.GetActiveScene().buildIndex + 1;
