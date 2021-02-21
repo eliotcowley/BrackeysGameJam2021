@@ -168,7 +168,8 @@ public class Human : MonoBehaviour
             }
             else
             {
-                Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
+                GameObject gerbil = Instantiate(this.gerbilPrefab, this.transform.position, Quaternion.identity);
+                gerbil.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             
             Destroy(this.gameObject);

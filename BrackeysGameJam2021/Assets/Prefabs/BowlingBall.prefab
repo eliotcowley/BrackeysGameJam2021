@@ -48,7 +48,7 @@ MonoBehaviour:
   speed: 5
   explodeFX: {fileID: 7301036371840884185, guid: e803ddbaeadfd1f43a812bc3cd96bf7f,
     type: 3}
-  spawnPoint: {fileID: 7198583132591834718}
+  spawnPoint: {fileID: 7104816898185393491}
 --- !u!1 &7104816898185393491
 GameObject:
   m_ObjectHideFlags: 0
