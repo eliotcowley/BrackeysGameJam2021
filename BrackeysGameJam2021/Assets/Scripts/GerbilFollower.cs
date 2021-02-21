@@ -47,6 +47,12 @@ public class GerbilFollower : MonoBehaviour
         this.animator = GetComponentInChildren<Animator>();
         this.animator.SetBool(Constants.Anim_IsWalking, false);
         this.animator.speed = 0f;
+        
+        // Set random values for the fur shader
+        MeshRenderer gerbelMesh = transform.Find("gerbel").GetComponent<MeshRenderer>();
+        gerbelMesh.material.SetColor("Primary", Random.ColorHSV());
+        gerbelMesh.material.SetColor("Secondary", Random.ColorHSV());
+        gerbelMesh.material.SetFloat("Rotation", Random.Range(-10, 10));
     }
 
     private void FixedUpdate()
