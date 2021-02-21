@@ -147,7 +147,7 @@ MonoBehaviour:
   NewVelocity: {x: 0, y: 0, z: 0}
   IsUnderground: 0
   speed: 200
-  undergroundDepth: 4
+  undergroundDepth: 10
   groundRenderer: {fileID: 0}
   groundAlphaWhenUnderground: 0.5
   digDelay: 0.5
