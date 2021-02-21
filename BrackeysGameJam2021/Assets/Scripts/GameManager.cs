@@ -138,14 +138,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Quit()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+        SceneManager.LoadScene(0);
     }
 
     private void CalculateFps()
