@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
@@ -39,6 +40,11 @@ public class UIManager : Singleton<UIManager>
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
+
         this.tutorialText.LeanAlphaText(0f, this.textFadeTime).setDelay(this.textFadeDelay);
         UpdateLevelText(GameManager.Instance.Level);
     }
@@ -91,6 +97,9 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateLevelText(int level)
     {
-        this.levelText.SetText($"Level\n{level} / 10");
+        if (this.levelText != null)
+        {
+            this.levelText.SetText($"Level\n{level} / 10");
+        }
     }
 }
