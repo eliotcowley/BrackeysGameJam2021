@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         this.GerbilsInSwarm = new List<GerbilFollower>();
-        this.Level = SceneManager.GetActiveScene().buildIndex + 1;
+        this.Level = SceneManager.GetActiveScene().buildIndex + 2;
     }
 
     private void Update()
@@ -109,14 +109,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Quit()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+        SceneManager.LoadScene(0);
     }
 
     private void CalculateFps()
@@ -160,7 +153,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            Restart();
+            SceneManager.LoadScene(0);
         }
     }
 

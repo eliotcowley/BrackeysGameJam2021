@@ -8,6 +8,7 @@ TagManager:
   - GerbilMain
   - BowlingBall
   - GerbilBEEG
+  - GerbilKiller
   layers:
   - Default
   - TransparentFX
