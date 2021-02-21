@@ -13,6 +13,20 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public float DeathY = -10f;
 
+    private int level = 0;
+    public int Level
+    {
+        get
+        {
+            return this.level;
+        }
+        set
+        {
+            this.level = value;
+            UIManager.Instance.UpdateLevelText(this.level);
+        }
+    }
+
     private bool gameOver = false;
     private bool paused = false;
     private bool levelWon = false;
@@ -27,6 +41,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         this.GerbilsInSwarm = new List<GerbilFollower>();
+        this.Level = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
     private void Update()
