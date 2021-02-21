@@ -42,7 +42,12 @@ public class GerbilFollower : MonoBehaviour
     private float attackTimer = 0f;
     private CinemachineImpulseSource cinemachineImpulseSource;
     private Animator animator;
-    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioSource walkAudioSource;
+
+    [SerializeField]
+    private AudioSource addAudioSource;
 
     private void Start()
     {
@@ -52,7 +57,6 @@ public class GerbilFollower : MonoBehaviour
         this.animator.SetBool(Constants.Anim_IsWalking, false);
         this.animator.speed = 0f;
         this.rb.velocity = Vector3.zero;
-        this.audioSource = GetComponent<AudioSource>();
         
         // Set random values for the fur shader
         MeshRenderer gerbelMesh = transform.Find("gerbel").GetComponent<MeshRenderer>();
@@ -108,7 +112,7 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, false);
                     this.animator.speed = 0f;
-                    this.audioSource.Stop();
+                    this.walkAudioSource.Stop();
                 }
             }
             else
@@ -117,7 +121,7 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, true);
                     this.animator.speed = 1f;
-                    this.audioSource.Play();
+                    this.walkAudioSource.Play();
                 }
             }
         }
@@ -160,6 +164,7 @@ public class GerbilFollower : MonoBehaviour
         }
 
         this.cinemachineImpulseSource.GenerateImpulse();
+        GameManager.Instance.PlayGerbilDieSFX();
         Destroy(this.gameObject);
     }
 
@@ -203,6 +208,7 @@ public class GerbilFollower : MonoBehaviour
             this.InSwarm = true;
             GameManager.Instance.GerbilsInSwarm.Add(this);
             UIManager.Instance.UpdateSwarmCountText();
+            this.addAudioSource.Play();
         }
     }
 }

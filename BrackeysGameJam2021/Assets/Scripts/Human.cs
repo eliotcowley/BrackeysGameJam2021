@@ -200,7 +200,8 @@ public class Human : MonoBehaviour
                 gerbil.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 gerbil.GetComponent<GerbilFollower>().TryAddToSwarm();
             }
-            
+
+            GameManager.Instance.PlayHumanDieSFX();
             Destroy(this.gameObject);
         }
     }

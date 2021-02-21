@@ -17,7 +17,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private AudioMixer sfxMixer;
 
-    private AudioMixerGroup group;
+    [SerializeField]
+    private AudioSource gerbilDieSFX;
+
+    [SerializeField]
+    private AudioSource winSFX;
+
+    [SerializeField]
+    private AudioSource humanDieSFX;
 
     private int level = 0;
     public int Level
@@ -47,7 +54,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         this.GerbilsInSwarm = new List<GerbilFollower>();
-        this.Level = SceneManager.GetActiveScene().buildIndex + 2;
+        this.Level = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void Update()
@@ -152,10 +159,14 @@ public class GameManager : Singleton<GameManager>
 
     public void Win()
     {
-        UIManager.Instance.ShowWinText();
-        this.levelWon = true;
-        PlayerMovement.Instance.CanMove = false;
-        PlayerMovement.Instance.NewVelocity = Vector3.zero;
+        if (!this.levelWon)
+        {
+            UIManager.Instance.ShowWinText();
+            this.levelWon = true;
+            PlayerMovement.Instance.CanMove = false;
+            PlayerMovement.Instance.NewVelocity = Vector3.zero;
+            this.winSFX.Play();
+        }
     }
 
     private void GoToNextLevel()
@@ -180,5 +191,15 @@ public class GameManager : Singleton<GameManager>
             workingTotal => workingTotal);
 
         return total / this.GerbilsInSwarm.Count;
+    }
+
+    public void PlayGerbilDieSFX()
+    {
+        this.gerbilDieSFX.Play();
+    }
+
+    public void PlayHumanDieSFX()
+    {
+        this.humanDieSFX.Play();
     }
 }
