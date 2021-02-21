@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -12,6 +13,11 @@ public class GameManager : Singleton<GameManager>
 
     [HideInInspector]
     public float DeathY = -10f;
+
+    [SerializeField]
+    private AudioMixer sfxMixer;
+
+    private AudioMixerGroup group;
 
     private int level = 0;
     public int Level
@@ -94,10 +100,12 @@ public class GameManager : Singleton<GameManager>
         if (this.paused)
         {
             PlayerMovement.Instance.CanMove = false;
+            this.sfxMixer.SetFloat("Volume", -80f);
         }
         else
         {
             StartCoroutine(EnableMovementAfterDelay());
+            this.sfxMixer.SetFloat("Volume", 0f);
         }
     }
 
@@ -109,6 +117,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Quit()
     {
+<<<<<<< Updated upstream
         if (Application.isEditor)
         {
             EditorApplication.isPlaying = false;
@@ -117,6 +126,10 @@ public class GameManager : Singleton<GameManager>
         {
             Application.Quit();
         }
+=======
+        this.sfxMixer.SetFloat("Volume", 0f);
+        SceneManager.LoadScene(0);
+>>>>>>> Stashed changes
     }
 
     private void CalculateFps()

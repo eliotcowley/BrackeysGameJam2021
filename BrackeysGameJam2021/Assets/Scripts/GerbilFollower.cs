@@ -42,6 +42,7 @@ public class GerbilFollower : MonoBehaviour
     private float attackTimer = 0f;
     private CinemachineImpulseSource cinemachineImpulseSource;
     private Animator animator;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -51,6 +52,7 @@ public class GerbilFollower : MonoBehaviour
         this.animator.SetBool(Constants.Anim_IsWalking, false);
         this.animator.speed = 0f;
         this.rb.velocity = Vector3.zero;
+        this.audioSource = GetComponent<AudioSource>();
         
         // Set random values for the fur shader
         MeshRenderer gerbelMesh = transform.Find("gerbel").GetComponent<MeshRenderer>();
@@ -106,6 +108,7 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, false);
                     this.animator.speed = 0f;
+                    this.audioSource.Stop();
                 }
             }
             else
@@ -114,6 +117,7 @@ public class GerbilFollower : MonoBehaviour
                 {
                     this.animator.SetBool(Constants.Anim_IsWalking, true);
                     this.animator.speed = 1f;
+                    this.audioSource.Play();
                 }
             }
         }

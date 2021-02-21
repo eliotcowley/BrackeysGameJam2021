@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GerbilsInSwarm: []
+  DeathY: -10
+  sfxMixer: {fileID: 24100000, guid: 8b8cec33e0a2b9a47b4246d863ccb23c, type: 2}
   fpsRefreshTime: 0.5

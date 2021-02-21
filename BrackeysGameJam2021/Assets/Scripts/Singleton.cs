@@ -152,4 +152,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 		}
 	}
 
+	public void Init()
+    {
+		Debug.Log($"{this.gameObject.name} initialized");
+    }
 }
