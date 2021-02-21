@@ -38,11 +38,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private bool flagForFixedUpdate = false;
     private Color groundMaterialColor;
     private float digTimer = 0f;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         this.Rb = GetComponent<Rigidbody>();
         this.groundMaterialColor = this.groundRenderer.material.color;
+        this.audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -121,5 +123,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             this.groundMaterialColor.g, 
             this.groundMaterialColor.b, 
             newAlpha);
+
+        this.audioSource.Play();
     }
 }
